@@ -1,0 +1,39 @@
+<div class="form-container">
+ <h1>Realiza Tu Pregunta!</h1>  
+ <form [formGroup]="contactForm" (ngSubmit)="onSave()">
+     <input type="text" formControlName="name" placeholder="Nombre">
+     <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+         <div class="container-error-menssage" *ngIf="name.errors.required">
+             Nombre es Requerido
+         </div>
+         <div class="container-error-menssage" *ngIf="name.errors.minlength">
+             Nombre necesita minimo 5 caracteres
+         </div>
+     </div>
+     <input type="text" formControlName="email" placeholder="email">
+     <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div class="container-error-menssage" *ngIf="email.errors.required">
+            Email es Requerido
+        </div>
+        <div class="container-error-menssage" *ngIf="email.errors.minlength">
+            Email necesita minimo 5 caracteres
+        </div>
+        <div class="container-error-menssage" *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.pattern">
+            Email debe ser valido
+        </div>
+    </div>
+     <textarea formControlName="message" placeholder="Mensaje"></textarea>
+     <div class="alert-danger" *ngIf="message.invalid && (message.dirty || message.touched)">
+        <div class="container-error-message" *ngIf="message.errors.required">
+            Mensaje es Requerido
+        </div>
+        <div class="container-error-message" *ngIf="message.errors.minlength">
+            Mensaje necesita minimo 10 caracteres
+        </div>
+        <div class="container-error-message" *ngIf="message.errors.maxlength">
+            Mensaje necesita maximo 100 caracteres
+        </div>
+    </div>
+    <button type="submit" class="btn-send" [disabled] = "!contactForm.valid">Enviar</button>
+</form> 
+</div>
